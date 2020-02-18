@@ -1,0 +1,57 @@
+<div
+    id="mock-page"
+    data-analytics-show
+    data-analytics-event="page-view"
+    data-analytics-screen-name="mock-page"
+>
+
+    <div id="section-1">
+        <button
+            id="button-click"
+            data-analytics-click
+            data-analytics-event="page-click"
+            data-analytics-event-category="my-application:page"
+            data-analytics-event-action="click:trigger-button"
+            data-analytics-event-label="success"
+            data-analytics-screen-name="mock-page"
+            data-analytics-dimension-22="test"
+        >
+            Click trigger
+        </button>
+    </div>
+
+    <div id="section-2">
+        <button id="button-add" onclick="addErrorAlert()"> Add </button>
+        <button
+            id="button-onmouseout"
+            data-analytics-mouseout
+            data-analytics-event="page-mouseout"
+        >
+            Trigger mouseout
+        </button>
+    </div>
+
+    <button id="button-untrack"> No trigger </button>
+
+    <button 
+        id="button-out"
+        data-analytics-click
+        data-analytics-event="page-click"
+        data-analytics-event-action="click:out-button"
+    > 
+        Button out 
+    </button>
+
+    <div 
+        id="hidden-element"
+        data-analytics-show
+        data-analytics-event="page-load"
+        data-analytics-event-category="my-application:page"
+        data-analytics-event-action="load:search"
+        data-analytics-event-label="success"
+        data-analytics-screen-name="mock-page"
+        style="display:none"
+    >
+        Hide element
+    </div>
+</div>

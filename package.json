@@ -1,0 +1,40 @@
+{
+  "name": "automatic-analytics-trigger",
+  "version": "1.0.0",
+  "description": "Automatically trigger events and mutations for analytics",
+  "main": "main.js",
+  "scripts": {
+    "test": "jest ^.+\\.spec.js",
+    "integration": "jest -i ^.+\\.test.js",
+    "tests": "npm run test && npm run integration"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FlaviaBertoni/automatic-analytics-trigger.git"
+  },
+  "author": "FlaviaBertoni",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FlaviaBertoni/automatic-analytics-trigger/issues"
+  },
+  "homepage": "https://github.com/FlaviaBertoni/automatic-analytics-trigger#readme",
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "@testing-library/dom": "^6.12.2",
+    "babel-jest": "^25.1.0",
+    "html-loader-jest": "^0.2.1",
+    "jest": "^25.1.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "html"
+    ],
+    "transform": {
+      "^.+\\.js?$": "babel-jest",
+      "^.+\\.html?$": "html-loader-jest"
+    }
+  },
+  "dependencies": {}
+}
