@@ -1,0 +1,7 @@
+node_modules
+
+.idea
+
+demo/node_modules
+
+demo/bundle.js
