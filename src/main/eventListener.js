@@ -1,30 +1,29 @@
 const DATASET = 'data-analytics';
 
-const eventHandler = ({ target }, datasetEvent, dispatcheEvent) => {
+export default class EventListener {
+  constructor(events, target, dispatcheEvent) {
+    this.target = target;
+    this.events = events;
+    this.dispatcheEvent = dispatcheEvent;
+    this.listeners = {};
+  }
+
+  registerEventsListeners() {
+    for (const event of this.events) {
+      this.listeners[event] = e => this._eventHandler(e, `${DATASET}-${event}`);
+
+      this.target.addEventListener(event, this.listeners[event], false);
+    }
+  }
+
+  removeEventsListeners() {
+    for (const event of this.events) {
+      this.target.removeEventListener(event, this.listeners[event], false);
+    }
+  }
+
+  _eventHandler({ target }, datasetEvent) {
     if (!target.hasAttribute(datasetEvent)) return;
-    dispatcheEvent(target);
+    this.dispatcheEvent(target);
+  }
 }
-
-const listeners = {};
-
-export const registerEventsListeners = (events, target, dispatcheEventData) => {
-    for (const event of events) {
-        listeners[event] = (e) => eventHandler(e, `${DATASET}-${event}`, dispatcheEventData);
-
-        target.addEventListener(
-            event, 
-            listeners[event], 
-            false
-        );
-    }
-};
-
-export const removeEventsListeners = (events, target, dispatcheEventData) => {
-    for (const event of events) {
-        target.removeEventListener(
-            event, 
-            listeners[event], 
-            false
-        );
-    }
-};

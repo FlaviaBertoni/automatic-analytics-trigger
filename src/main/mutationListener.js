@@ -1,41 +1,51 @@
 const DATASET = 'data-analytics';
 
-let observer;
+export default class MutationListener {
+  constructor(mutations, target, dispatcheEvent) {
+    this.target = target;
+    this.mutations = mutations;
+    this.dispatcheEvent = dispatcheEvent;
+  }
 
-const isShowEvent = (node) => node.dataset && node.hasAttribute([`${DATASET}-show`]);
-
-const isVisibleElement = (element) => element.style.display != 'none' && element.style.visibility != 'hidden';
-
-const mutationHandler = (mutations, dispatcheEventData) => {
-    for(let mutation of mutations) {
-
-        // Showed 
-        if (mutation.type === 'attributes' && isShowEvent(mutation.target) && mutation.attributeName === 'style') {
-            if (isVisibleElement(mutation.target)) dispatcheEventData(mutation.target)
-        }
-
-        // Added
-        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-            for (let node of mutation.addedNodes) {
-                if (isShowEvent(node) && isVisibleElement(node)) dispatcheEventData(node)
-            }
-        }
-    }
-}
-
-export const registerMutationsListeners = (target, dispatcheEventData) => {
-    observer = new MutationObserver((mutationsList) => mutationHandler(mutationsList, dispatcheEventData));
-    observer.observe(target, {
+  registerMutationsListeners() {
+    this.observer = new MutationObserver(this._mutationHandler.bind(this));
+    this.observer.observe(this.target, {
       attributes: true,
       childList: true,
       subtree: true,
-      attributeFilter: ['style']
+      attributeFilter: ['style'],
     });
-};
+  }
 
-export const removeMutationsListeners = () => {
-    if (observer) {
-        observer.disconnect();
-        observer = null;
+  removeMutationsListeners() {
+    if (this.observer) {
+      this.observer.disconnect();
+      this.observer = null;
     }
-};
+  }
+
+  _mutationHandler(mutations) {
+    for (let mutation of mutations) {
+      this._checkShowAttributes(mutation);
+      this._checkShowAddedNodes(mutation);
+    }
+  }
+
+  _checkShowAttributes(mutation) {
+    if (mutation.type === 'attributes' && isShowEvent(mutation.target) && mutation.attributeName === 'style') {
+      if (isVisibleElement(mutation.target)) this.dispatcheEvent(mutation.target);
+    }
+  }
+
+  _checkShowAddedNodes(mutation) {
+    if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+      for (let node of mutation.addedNodes) {
+        if (isShowEvent(node) && isVisibleElement(node)) this.dispatcheEvent(node);
+      }
+    }
+  }
+}
+
+const isShowEvent = node => node.dataset && node.hasAttribute([`${DATASET}-show`]);
+
+const isVisibleElement = element => element.style.display != 'none' && element.style.visibility != 'hidden';
