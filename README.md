@@ -57,6 +57,8 @@ And add the analytics data attributes to the elements you want to watch:
 </button>
 ```
 
+See the [demo](https://flaviabertoni.github.io/automatic-analytics-trigger/)
+
 If you will use Google Analytics and you don't know how to configure it, see https://developers.google.com/tag-manager/quickstart.
 
 
