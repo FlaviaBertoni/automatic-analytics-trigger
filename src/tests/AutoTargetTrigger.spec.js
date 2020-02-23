@@ -1,5 +1,5 @@
 import AutoTriggerTarget from '../main/AutoTriggerTarget';
-import config from '../../config';
+import config from '../config';
 
 import EventListener from '../main/EventListener';
 jest.mock('../main/EventListener');

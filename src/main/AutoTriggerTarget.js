@@ -1,4 +1,4 @@
-import defaultConfig from '../../config.js';
+import defaultConfig from '../config';
 
 import EventListener from './EventListener';
 

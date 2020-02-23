@@ -1,7 +1,7 @@
 const mockPage = require('./mockPage.html');
 require('./mockScript');
 
-import AutoTargetTrigger from '../../../main';
+import AutoTargetTrigger from '../../index';
 
 const createAutoAnalyticsTrigger = config => {
   window.dataLayer = [];

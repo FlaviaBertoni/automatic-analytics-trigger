@@ -2,7 +2,10 @@
   "name": "automatic-analytics-trigger",
   "version": "1.0.0",
   "description": "Automatically trigger events and mutations for analytics",
-  "main": "main.js",
+  "main": "dist/automatic-analytics-trigger.js",
+  "module": "dist/automatic-analytics-trigger.esm.js",
+  "browser": "dist/automatic-analytics-trigger.min.js",
+  "files": ["dist"],
   "scripts": {
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": "jest ^.+\\.spec.js --config=jest.config.js",
@@ -10,12 +13,22 @@
     "test:coverage": "jest --collectCoverage --config=jest.config.js",
     "format": "prettier --write \"src/**/*.js\"",
     "lint": "eslint \"src/**/*.*.js\"",
-    "lint:fix": "npm run lint --fix"
+    "lint:fix": "npm run lint --fix",
+    "build": "rollup -c",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FlaviaBertoni/automatic-analytics-trigger.git"
   },
+  "keywords": [
+    "Analytics",
+    "GTM"
+  ],
   "author": "FlaviaBertoni",
   "license": "MIT",
   "bugs": {
@@ -23,25 +36,22 @@
   },
   "homepage": "https://github.com/FlaviaBertoni/automatic-analytics-trigger#readme",
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.4",
     "@babel/preset-env": "^7.8.4",
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "@rollup/plugin-json": "^4.0.2",
+    "@rollup/plugin-node-resolve": "^7.1.1",
     "babel-jest": "^25.1.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
     "html-loader-jest": "^0.2.1",
     "jest": "^25.1.0",
-    "prettier": "^1.19.1"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "html"
-    ],
-    "transform": {
-      "^.+\\.js?$": "babel-jest",
-      "^.+\\.html?$": "html-loader-jest"
-    }
+    "prettier": "^1.19.1",
+    "rollup": "^1.31.1",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-terser": "^5.2.0"
   },
   "dependencies": {}
 }
