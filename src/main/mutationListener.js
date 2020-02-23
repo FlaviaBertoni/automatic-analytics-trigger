@@ -46,6 +46,6 @@ export default class MutationListener {
   }
 }
 
-const isShowEvent = node => node.hasAttribute([`${DATASET}-show`]);
+const isShowEvent = node => node.dataset && node.hasAttribute([`${DATASET}-show`]);
 
 const isVisibleElement = element => element.style.display != 'none' && element.style.visibility != 'hidden';

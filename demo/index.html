@@ -2,8 +2,11 @@
 <html lang="en" class="h-100">
     <head>
         <meta charset="UTF-8">
-        <title>Title</title>
-        <script src="bundle.js"></script>
+        <title>Automatic Analytics Trigger</title>
+        
+        <script src="../dist/automatic-analytics-trigger.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?autoload=true&amp" defer></script>        
+        
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
         <style>
@@ -16,45 +19,107 @@
             .footer {
                 background-color: #f5f5f5;
             }
+
+            #data-layer-click {
+                height: 228px;
+            }
+
+            #data-layer-show {
+                height: 190px;
+            }
+
+            .prettyprint{
+                background-color: #f8f9fa;
+                background-clip: border-box;
+                border: 1px solid rgba(0,0,0,.125);
+                border-radius: .25rem;
+            }
         </style>
     </head>
     <body class="d-flex flex-column h-100">
+        <main role="main" class="flex-shrink-0">
+            <div class="container-md">
+                <div class="text-center mt-5 mb-5">
+                    <h1>Automatic Analytics Trigger</h1>
+                    <p class="lead">demonstration of how to automatically trigger events and mutations with automatic-analytics-trigger lib</p>
+                </div>
 
-        <main
-                data-analytics-show
-                data-analytics-event="page-view"
-                data-analytics-screen-name="demo-page"
-                role="main"
-                class="flex-shrink-0"
-        >
-            <div class="container">
-                <h1 class="mt-5">Automatic Analytics Trigger</h1>
-                <p class="lead">Demo automatically trigger events and mutations for analytics</p>
+                <h3>Click event example:</h3>
 
-                <br/>
+                <p>
+                    When you click on the button bellow you will  see a simulation where data layer object will be incremented by your click.
+                    This occurs because the button has the <mark>data-analytics-click</mark> attribute.
+                </p>
 
-                <button
-                    id="button-click"
-                    data-analytics-click
-                    data-analytics-event="page-click"
-                    data-analytics-event-category="my-application:page"
-                    data-analytics-event-action="click:trigger-button"
-                    data-analytics-event-label="success"
-                    data-analytics-screen-name="demo-page"
-                    data-analytics-dimension-22="test"
-                >
-                    Click trigger
-                </button>
+                <div id="click-demo" class="row mt-4 mb-4">
+                    <div class="col-md">
+                        <pre id="add-analytics-click-element" class="prettyprint"></pre>
+                    </div>
+                    <div class="col-md">
+                        <div id="click-trigger-button">
+                            <button
+                                type="button" 
+                                class="btn btn-primary btn-lg btn-block" 
+                                data-analytics-click 
+                                data-analytics-event="page-click"
+                                data-analytics-event-category="my-application:page"
+                                data-analytics-event-action="click:trigger-button"
+                                data-analytics-event-label="success"
+                                data-analytics-screen-name="demo-page"
+                                data-analytics-dimension-22="test"
+                            >
+                                Click to trigger
+                            </button>
+                        </div>
+                        <pre id="data-layer-click" class="prettyprint lang-js"></pre>
+                    </div>
+                </div>
 
+                <h3>Show mutation example:</h3>
+                <p>
+                    When the element with <mark>data-analytics-show</mark> attribute is displayed 
+                    the simulated data layer will be incremented. You can use this to know when an alert
+                    is added to your page like the example bellow.
+                </p>
+
+                <div id="show-demo" class="row mt-4 mb-4">
+                    <div class="col-md-12 mb-2">
+                        <div class="custom-control custom-switch">
+                            <input onclick="switchAlert()" type="checkbox" class="custom-control-input" id="customSwitch1">
+                            <label class="custom-control-label" for="customSwitch1">Toggle alert</label>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <pre id="add-analytics-show-element" class="prettyprint"></pre>
+                    </div>
+                    <div class="col-md">
+                        <span id="show-trigger-alert">
+                            <div 
+                                id="alert"
+                                class="alert alert-danger col-8" 
+                                role="alert"
+                                data-analytics-show 
+                                data-analytics-event="alert-error"
+                                data-analytics-event-action="click:toggle-button"
+                                data-analytics-event-label="error"
+                                style="visibility: hidden;"
+                            >
+                                Danger alert displayed!
+                            </div>
+                        </span>
+                        <pre id="data-layer-show" class="prettyprint lang-js"></pre>
+                    </div>
+                </div>
             </div>
         </main>
 
-        <footer class="footer mt-auto py-3">
+        <footer class="footer mt-auto text-center py-3">
             <div class="container">
-                <span class="text-muted">automatic-analytics-trigger</span>
-                <a href="https://github.com/FlaviaBertoni/automatic-analytics-trigger#readme">Git Hub</a>
+                <span class="text-muted">see automatic-analytics-trigger on </span>
+                <a href="https://github.com/FlaviaBertoni/automatic-analytics-trigger#readme">GitHub</a>
             </div>
         </footer>
-
+        
+        <script type="text/javascript" src="main.js"></script>
     </body>
 </html>
