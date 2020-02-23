@@ -5,10 +5,11 @@
   "main": "main.js",
   "scripts": {
     "test": "npm run test:unit && npm run test:integration",
-    "test:unit": "jest ^.+\\.spec.js",
-    "test:integration": "jest -i ^.+\\.test.js",
+    "test:unit": "jest ^.+\\.spec.js --config=jest.config.js",
+    "test:integration": "jest -i ^.+\\.test.js --config=jest.config.js",
+    "test:coverage": "jest --collectCoverage --config=jest.config.js",
     "format": "prettier --write \"src/**/*.js\"",
-    "lint": "eslint \"src/**/*.js\"",
+    "lint": "eslint \"src/**/*.*.js\"",
     "lint:fix": "npm run lint --fix"
   },
   "repository": {

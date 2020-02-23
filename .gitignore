@@ -5,3 +5,5 @@ node_modules
 demo/node_modules
 
 demo/bundle.js
+
+coverage/
