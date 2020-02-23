@@ -1,6 +1,6 @@
 {
   "name": "automatic-analytics-trigger",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Automatically trigger events and mutations for analytics",
   "main": "dist/automatic-analytics-trigger.js",
   "module": "dist/automatic-analytics-trigger.esm.js",
