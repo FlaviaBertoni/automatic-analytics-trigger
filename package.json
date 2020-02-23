@@ -36,7 +36,7 @@
   "bugs": {
     "url": "https://github.com/FlaviaBertoni/automatic-analytics-trigger/issues"
   },
-  "homepage": "https://github.com/FlaviaBertoni/automatic-analytics-trigger#readme",
+  "homepage": "https://flaviabertoni.github.io/automatic-analytics-trigger/",
   "devDependencies": {
     "@babel/core": "^7.8.4",
     "@babel/preset-env": "^7.8.4",
