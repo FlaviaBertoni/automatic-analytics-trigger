@@ -4,7 +4,7 @@ import EventListener from './EventListener';
 
 import MutationListener from './MutationListener';
 
-export default class AutoTriggerTarget {
+export default class AutomaticAnalyticsTrigger {
   constructor(callback, config = defaultConfig) {
     this.callback = callback;
     this.target = config.target;

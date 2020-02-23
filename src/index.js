@@ -1,3 +1,3 @@
-import AutoTriggerTarget from './main/AutoTriggerTarget';
+import AutomaticAnalyticsTrigger from './main/AutomaticAnalyticsTrigger';
 
-export default AutoTriggerTarget;
+export default AutomaticAnalyticsTrigger;

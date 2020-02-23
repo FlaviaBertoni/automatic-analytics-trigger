@@ -3,6 +3,7 @@ import MutationListener from '../main/MutationListener';
 const mutations = ['show'];
 const target = jest.fn();
 const dispatcheEvent = jest.fn();
+const dataset = { analyticsEvent: 'event' };
 
 const mockMutationObserverInstance = { observe: jest.fn(), disconnect: jest.fn() };
 global.MutationObserver = jest.fn(callback => {
@@ -51,7 +52,7 @@ describe('When a mutation occurs and observer callback is called', () => {
     const mutationListener = new MutationListener(mutations, target, dispatcheEvent);
     mutationListener.registerMutationsListeners();
 
-    const mutationTarget = { hasAttribute: jest.fn(() => true), style: { display: 'visible' } };
+    const mutationTarget = { dataset, hasAttribute: jest.fn(() => true), style: { display: 'visible' } };
     mutationListener.observer.callback([
       {
         type: 'attributes',
@@ -84,7 +85,7 @@ describe('When a mutation occurs and observer callback is called', () => {
     const mutationListener = new MutationListener(mutations, target, dispatcheEvent);
     mutationListener.registerMutationsListeners();
 
-    const mutationTarget = { hasAttribute: jest.fn(() => true), style: { display: 'visible' } };
+    const mutationTarget = { dataset, hasAttribute: jest.fn(() => true), style: { display: 'visible' } };
     mutationListener.observer.callback([
       {
         type: 'childList',

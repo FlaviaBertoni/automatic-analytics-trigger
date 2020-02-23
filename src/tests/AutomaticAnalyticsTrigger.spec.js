@@ -1,4 +1,4 @@
-import AutoTriggerTarget from '../main/AutoTriggerTarget';
+import AutomaticAnalyticsTrigger from '../main/AutomaticAnalyticsTrigger';
 import config from '../config';
 
 import EventListener from '../main/EventListener';
@@ -15,101 +15,101 @@ const customConfig = {
   mutations: ['customMutation'],
 };
 
-describe('When AutoTriggerTarget constructor is called', () => {
-  it('should initilize the autoTriggerTarget instance with default values when a config is not informed', () => {
-    const autoTriggerTarget = new AutoTriggerTarget(mockCallback);
+describe('When AutomaticAnalyticsTrigger constructor is called', () => {
+  it('should initilize the automaticAnalyticsTrigger instance with default values when a config is not informed', () => {
+    const automaticAnalyticsTrigger = new AutomaticAnalyticsTrigger(mockCallback);
 
-    expect(autoTriggerTarget.target).toEqual(config.target);
-    expect(autoTriggerTarget.events).toEqual(config.events);
-    expect(autoTriggerTarget.mutations).toEqual(config.mutations);
+    expect(automaticAnalyticsTrigger.target).toEqual(config.target);
+    expect(automaticAnalyticsTrigger.events).toEqual(config.events);
+    expect(automaticAnalyticsTrigger.mutations).toEqual(config.mutations);
   });
 
-  it('should initilize the autoTriggerTarget instance with a custom config values correctly', () => {
-    const autoTriggerTarget = new AutoTriggerTarget(mockCallback, customConfig);
+  it('should initilize the automaticAnalyticsTrigger instance with a custom config values correctly', () => {
+    const automaticAnalyticsTrigger = new AutomaticAnalyticsTrigger(mockCallback, customConfig);
 
-    expect(autoTriggerTarget.target).toEqual(customConfig.target);
-    expect(autoTriggerTarget.events).toEqual(customConfig.events);
-    expect(autoTriggerTarget.mutations).toEqual(customConfig.mutations);
+    expect(automaticAnalyticsTrigger.target).toEqual(customConfig.target);
+    expect(automaticAnalyticsTrigger.events).toEqual(customConfig.events);
+    expect(automaticAnalyticsTrigger.mutations).toEqual(customConfig.mutations);
   });
 
   it('should set callback function', () => {
-    const autoTriggerTarget = new AutoTriggerTarget(mockCallback);
-    expect(autoTriggerTarget.callback).toEqual(mockCallback);
+    const automaticAnalyticsTrigger = new AutomaticAnalyticsTrigger(mockCallback);
+    expect(automaticAnalyticsTrigger.callback).toEqual(mockCallback);
   });
 });
 
-describe('When autoTriggerTarget init is called', () => {
+describe('When automaticAnalyticsTrigger init is called', () => {
   beforeEach(() => jest.clearAllMocks());
 
   it('should register events listeners', () => {
-    const autoTriggerTarget = new AutoTriggerTarget(mockCallback);
-    autoTriggerTarget.init();
+    const automaticAnalyticsTrigger = new AutomaticAnalyticsTrigger(mockCallback);
+    automaticAnalyticsTrigger.init();
 
     const mockEventListenerInstance = EventListener.mock.instances[0];
     expect(mockEventListenerInstance.registerEventsListeners).toHaveBeenCalledWith();
   });
 
   it('should not register events listeners when events are empty', () => {
-    const autoTriggerTarget = new AutoTriggerTarget(mockCallback, { ...config, events: undefined });
-    autoTriggerTarget.init();
+    const automaticAnalyticsTrigger = new AutomaticAnalyticsTrigger(mockCallback, { ...config, events: undefined });
+    automaticAnalyticsTrigger.init();
     expect(EventListener.mock.instances).toHaveLength(0);
   });
 
   it('should register mutations listeners', () => {
-    const autoTriggerTarget = new AutoTriggerTarget(mockCallback);
-    autoTriggerTarget.init();
+    const automaticAnalyticsTrigger = new AutomaticAnalyticsTrigger(mockCallback);
+    automaticAnalyticsTrigger.init();
 
     const mockMutationListenerInstance = MutationListener.mock.instances[0];
     expect(mockMutationListenerInstance.registerMutationsListeners).toHaveBeenCalledWith();
   });
 
   it('should not register mutations listeners when mutations are empty', () => {
-    const autoTriggerTarget = new AutoTriggerTarget(mockCallback, { ...config, mutations: undefined });
-    autoTriggerTarget.init();
+    const automaticAnalyticsTrigger = new AutomaticAnalyticsTrigger(mockCallback, { ...config, mutations: undefined });
+    automaticAnalyticsTrigger.init();
     expect(MutationListener.mock.instances).toHaveLength(0);
   });
 });
 
-describe('When autoTriggerTarget close is called', () => {
+describe('When automaticAnalyticsTrigger close is called', () => {
   beforeEach(() => jest.clearAllMocks());
 
   it('should remove events listeners', () => {
-    const autoTriggerTarget = new AutoTriggerTarget(mockCallback);
-    autoTriggerTarget.init();
-    autoTriggerTarget.close();
+    const automaticAnalyticsTrigger = new AutomaticAnalyticsTrigger(mockCallback);
+    automaticAnalyticsTrigger.init();
+    automaticAnalyticsTrigger.close();
 
     const mockEventListenerInstance = EventListener.mock.instances[0];
     expect(mockEventListenerInstance.removeEventsListeners).toHaveBeenCalledWith();
   });
 
   it('should not remove events listeners when events are empty', () => {
-    const autoTriggerTarget = new AutoTriggerTarget(mockCallback, { ...config, events: undefined });
-    autoTriggerTarget.init();
-    autoTriggerTarget.close();
+    const automaticAnalyticsTrigger = new AutomaticAnalyticsTrigger(mockCallback, { ...config, events: undefined });
+    automaticAnalyticsTrigger.init();
+    automaticAnalyticsTrigger.close();
 
     expect(EventListener.mock.instances).toHaveLength(0);
   });
 
   it('should remove mutations listeners', () => {
-    const autoTriggerTarget = new AutoTriggerTarget(mockCallback);
-    autoTriggerTarget.init();
-    autoTriggerTarget.close();
+    const automaticAnalyticsTrigger = new AutomaticAnalyticsTrigger(mockCallback);
+    automaticAnalyticsTrigger.init();
+    automaticAnalyticsTrigger.close();
 
     const mockMutationListenerInstance = MutationListener.mock.instances[0];
     expect(mockMutationListenerInstance.removeMutationsListeners).toHaveBeenCalledWith();
   });
 
   it('should not remove mutations listeners when mutations are empty', () => {
-    const autoTriggerTarget = new AutoTriggerTarget(mockCallback, { ...config, mutations: undefined });
-    autoTriggerTarget.init();
-    autoTriggerTarget.close();
+    const automaticAnalyticsTrigger = new AutomaticAnalyticsTrigger(mockCallback, { ...config, mutations: undefined });
+    automaticAnalyticsTrigger.init();
+    automaticAnalyticsTrigger.close();
 
     expect(MutationListener.mock.instances).toHaveLength(0);
   });
 });
 
-describe('When autoTriggerTarget dispatcheEventData is called', () => {
-  const autoTriggerTarget = new AutoTriggerTarget(mockCallback);
+describe('When automaticAnalyticsTrigger dispatcheEventData is called', () => {
+  const automaticAnalyticsTrigger = new AutomaticAnalyticsTrigger(mockCallback);
   const target = {
     dataset: {
       analyticsEvent: 'event',
@@ -126,7 +126,7 @@ describe('When autoTriggerTarget dispatcheEventData is called', () => {
   beforeEach(() => jest.clearAllMocks());
 
   it('should call callback with correctly event data', () => {
-    autoTriggerTarget._dispatcheEventData(target);
+    automaticAnalyticsTrigger._dispatcheEventData(target);
     expect(mockCallback).toHaveBeenCalledWith({
       event: 'event',
       eventCategory: 'eventCategory',
@@ -142,7 +142,9 @@ describe('When autoTriggerTarget dispatcheEventData is called', () => {
   });
 
   it('should call callback with just event and screenName data', () => {
-    autoTriggerTarget._dispatcheEventData({ dataset: { analyticsEvent: 'load', analyticsScreenName: 'login' } });
+    automaticAnalyticsTrigger._dispatcheEventData({
+      dataset: { analyticsEvent: 'load', analyticsScreenName: 'login' },
+    });
     expect(mockCallback).toHaveBeenCalledWith({
       event: 'load',
       screenName: 'login',
