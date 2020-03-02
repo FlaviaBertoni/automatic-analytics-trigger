@@ -1,3 +1,5 @@
+![npm](https://img.shields.io/npm/v/automatic-analytics-trigger) ![npm bundle size](https://img.shields.io/bundlephobia/min/automatic-analytics-trigger)
+
 # automatic-analytics-trigger
 Automatically trigger on events and mutations for sending analytics
 
