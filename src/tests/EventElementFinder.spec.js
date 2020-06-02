@@ -49,4 +49,4 @@ const mockClickEventAndFindElement = (button, finder, attributeToFind) => {
   button.click();
 
   return element;
-}
+};
