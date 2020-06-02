@@ -7,8 +7,8 @@ import EventElementFinder from './EventElementFinder';
 import MutationListener from './MutationListener';
 
 export default class AutomaticAnalyticsTrigger {
-  constructor(callback, config) {
-    config = { ...defaultConfig, ...config };
+  constructor(callback, customConfig) {
+    const config = { ...defaultConfig, ...customConfig};
 
     this.callback = callback;
     this.target = config.target;
