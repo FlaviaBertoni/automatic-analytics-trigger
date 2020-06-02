@@ -74,6 +74,8 @@ You can use a custom configuration to change the `target`, `events` and `mutatio
   _Default value:  `['show']`_
 - **target**: the element you want to listen `events` and `mutations`.  
   _Default value: `documentElement`_
+- **maxAncestorsChecks**: maximum elements depth that events will be captured. 
+  _Default value: 5
 
 ```js
 const callback = (dataEvent) => dataLayer.push(dataEvent);
