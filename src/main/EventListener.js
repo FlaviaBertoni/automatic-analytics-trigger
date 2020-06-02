@@ -1,11 +1,12 @@
 const DATASET = 'data-analytics';
 
 export default class EventListener {
-  constructor(events, target, dispatcheEvent) {
+  constructor(events, target, dispatcheEvent, finder) {
     this.target = target;
     this.events = events;
     this.dispatcheEvent = dispatcheEvent;
     this.listeners = {};
+    this.finder = finder;
   }
 
   registerEventsListeners() {
@@ -22,8 +23,11 @@ export default class EventListener {
     }
   }
 
-  _eventHandler({ target }, datasetEvent) {
-    if (!target.hasAttribute(datasetEvent)) return;
-    this.dispatcheEvent(target);
+  _eventHandler(event, datasetEvent) {
+    const markedElement = this.finder.firstWithAttribute(event, datasetEvent);
+
+    if (markedElement == undefined) return;
+
+    this.dispatcheEvent(markedElement);
   }
 }

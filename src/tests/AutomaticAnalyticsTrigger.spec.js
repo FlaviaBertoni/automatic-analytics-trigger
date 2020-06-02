@@ -4,6 +4,9 @@ import config from '../config';
 import EventListener from '../main/EventListener';
 jest.mock('../main/EventListener');
 
+import EventElementFinder from '../main/EventElementFinder';
+jest.mock('../main/EventElementFinder');
+
 import MutationListener from '../main/MutationListener';
 jest.mock('../main/MutationListener');
 
@@ -13,6 +16,7 @@ const customConfig = {
   target: 'customTargetElement',
   events: ['customEvent'],
   mutations: ['customMutation'],
+  maxAncestorsChecks: 6,
 };
 
 describe('When AutomaticAnalyticsTrigger constructor is called', () => {
@@ -30,11 +34,17 @@ describe('When AutomaticAnalyticsTrigger constructor is called', () => {
     expect(automaticAnalyticsTrigger.target).toEqual(customConfig.target);
     expect(automaticAnalyticsTrigger.events).toEqual(customConfig.events);
     expect(automaticAnalyticsTrigger.mutations).toEqual(customConfig.mutations);
+    expect(automaticAnalyticsTrigger.maxAncestorsChecks).toEqual(customConfig.maxAncestorsChecks);
   });
 
   it('should set callback function', () => {
     const automaticAnalyticsTrigger = new AutomaticAnalyticsTrigger(mockCallback);
     expect(automaticAnalyticsTrigger.callback).toEqual(mockCallback);
+  });
+
+  it('should instantiate a finder', () => {
+    const automaticAnalyticsTrigger = new AutomaticAnalyticsTrigger(mockCallback);
+    expect(automaticAnalyticsTrigger.finder instanceof EventElementFinder).toBeTruthy();
   });
 });
 
