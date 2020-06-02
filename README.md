@@ -74,8 +74,8 @@ You can use a custom configuration to change the `target`, `events` and `mutatio
   _Default value:  `['show']`_
 - **target**: the element you want to listen `events` and `mutations`.  
   _Default value: `documentElement`_
-- **maxAncestorsChecks**: maximum elements depth that events will be captured. 
-  _Default value: 5
+- **maxAncestorsChecks**: maximum elements depth that events will be captured (e.g, if section has `data-analytics-click` attribute in element tree: `section > div > button` when button is clicked even it haven't analytics attribute the event will be dispatched, because the button is in the 2 depth).
+  _Default value: `5`_
 
 ```js
 const callback = (dataEvent) => dataLayer.push(dataEvent);
