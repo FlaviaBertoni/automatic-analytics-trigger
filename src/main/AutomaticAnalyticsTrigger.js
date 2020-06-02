@@ -2,21 +2,28 @@ import defaultConfig from '../config';
 
 import EventListener from './EventListener';
 
+import EventElementFinder from './EventElementFinder';
+
 import MutationListener from './MutationListener';
 
 export default class AutomaticAnalyticsTrigger {
-  constructor(callback, config = defaultConfig) {
+  constructor(callback, config) {
+    config = { ...defaultConfig, ...config };
+
     this.callback = callback;
     this.target = config.target;
     this.events = config.events;
     this.mutations = config.mutations;
+    this.maxAncestorsChecks = config.maxAncestorsChecks;
+
+    this.finder = new EventElementFinder(this.maxAncestorsChecks);
 
     this._dispatcheEventData = this._dispatcheEventData.bind(this);
   }
 
   init() {
     if (this.events) {
-      this.eventListener = new EventListener(this.events, this.target, this._dispatcheEventData);
+      this.eventListener = new EventListener(this.events, this.target, this._dispatcheEventData, this.finder);
       this.eventListener.registerEventsListeners();
     }
 
